@@ -54,7 +54,7 @@ Current phase
 
 - [x] Define `User` and `Post` TypeScript types based on JSONPlaceholder responses.
 - [x] Create reusable API client with typed responses.
-- [ ] Implement HTTP error handling and normalized error messages.
+- [x] Implement HTTP error handling and normalized error messages.
 - [ ] Configure MSW handlers and test fixtures.
 - [ ] Configure MSW lifecycle and fail on unhandled requests.
 - [ ] Add API client tests for successful responses and HTTP errors.
