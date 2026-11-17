@@ -26,16 +26,34 @@ export function UserDirectory({ selectedUserId, onSelectUser }: UserDirectoryPro
   const filteredUsers = useMemo(() => filterUsersByName(users, searchTerm), [users, searchTerm])
 
   return (
-    <section aria-labelledby="user-directory-heading">
-      <h2 id="user-directory-heading">Users</h2>
+    <section
+      aria-labelledby="user-directory-heading"
+      className="flex flex-col gap-4 rounded-2xl border border-line bg-surface p-4 shadow-sm sm:p-5 lg:sticky lg:top-8"
+    >
+      <h2 id="user-directory-heading" className="text-lg font-semibold tracking-tight text-ink">
+        Users
+      </h2>
+
       <UserSearch value={searchTerm} onChange={setSearchTerm} />
 
       {isPending ? (
-        <p role="status">Loading users...</p>
+        <p role="status" className="rounded-xl bg-canvas px-4 py-6 text-sm leading-6 text-muted">
+          Loading users...
+        </p>
       ) : isError ? (
-        <p role="alert">{getErrorMessage(error)}</p>
+        <p
+          role="alert"
+          className="rounded-xl bg-danger-soft px-4 py-6 text-sm font-medium leading-6 text-danger"
+        >
+          {getErrorMessage(error)}
+        </p>
       ) : filteredUsers.length === 0 ? (
-        <p role="status">No users found.</p>
+        <p
+          role="status"
+          className="rounded-xl border border-dashed border-line bg-canvas px-4 py-10 text-center text-sm leading-6 text-muted"
+        >
+          No users found.
+        </p>
       ) : (
         <UserList
           users={filteredUsers}

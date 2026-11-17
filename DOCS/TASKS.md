@@ -12,9 +12,9 @@
 ## **Project roadmap**
 
 - [x] Phase 1 — Foundation `Completed`
-- [ ] Phase 2 — Core functionality `Current`
-- [ ] Phase 3 — Post creation `Pending`
-- [ ] Phase 4 — UX and polish `Pending`
+- [x] Phase 2 — Core functionality `Completed`
+- [x] Phase 3 — Post creation `Completed`
+- [ ] Phase 4 — UX and polish `Current`
 - [ ] Phase 5 — Quality assurance `Pending`
 - [ ] Phase 6 — Security and delivery `Pending`
 
@@ -42,7 +42,7 @@ Completed
 
 ## **Phase 2 — Core functionality**
 
-Current phase
+Completed
 
 `feat/core-functionality`
 
@@ -133,6 +133,8 @@ feat: display posts for selected users
 
 ## **Phase 3 — Post creation**
 
+Completed
+
 `feat/post-creation`
 
 **Target: 30 minutes**
@@ -192,6 +194,8 @@ test: cover post creation and validation behavior
 
 ## **Phase 4 — UX and polish**
 
+Current phase
+
 `feat/ux-polish`
 
 **Target: 25 minutes**
@@ -200,11 +204,11 @@ test: cover post creation and validation behavior
 
 ### **4.1 — Visual foundation**
 
-- [ ] Establish typography, spacing and color conventions.
-- [ ] Define reusable layout primitives where useful.
-- [ ] Create a responsive application layout.
-- [ ] Establish visual hierarchy between users and posts.
-- [ ] Implement selected-user visual state.
+- [x] Establish typography, spacing and color conventions.
+- [x] Define reusable layout primitives where useful.
+- [x] Create a responsive application layout.
+- [x] Establish visual hierarchy between users and posts.
+- [x] Implement selected-user visual state.
 
 ### **4.2 — Interaction and feedback**
 

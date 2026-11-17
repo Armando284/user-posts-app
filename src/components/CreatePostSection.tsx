@@ -8,5 +8,9 @@ interface CreatePostSectionProps {
 export function CreatePostSection({ userId }: CreatePostSectionProps) {
   const createPost = useCreatePost(userId)
 
-  return <CreatePostForm onSubmit={createPost} />
+  return (
+    <div className="border-t border-line pt-6">
+      <CreatePostForm onSubmit={createPost} />
+    </div>
+  )
 }
