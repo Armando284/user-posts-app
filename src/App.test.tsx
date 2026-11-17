@@ -28,6 +28,27 @@ describe('App', () => {
     expect(leanne).toHaveAttribute('aria-pressed', 'true')
   })
 
+  it('keeps a created post when switching between users', async () => {
+    const user = userEvent.setup()
+    renderWithQueryClient(<App />)
+
+    await user.click(await screen.findByRole('button', { name: /Leanne Graham/ }))
+    await screen.findByText('Leanne post one')
+
+    await user.type(screen.getByLabelText('Title'), 'Session post')
+    await user.type(screen.getByLabelText('Post content'), 'Created during the session')
+    await user.click(screen.getByRole('button', { name: 'Create post' }))
+    expect(await screen.findByText('Session post')).toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: /Ervin Howell/ }))
+    await screen.findByText('Ervin post one')
+
+    await user.click(screen.getByRole('button', { name: /Leanne Graham/ }))
+
+    expect(await screen.findByText('Session post')).toBeInTheDocument()
+    expect(screen.getByText('Leanne post one')).toBeInTheDocument()
+  })
+
   it('reuses cached posts when returning to a previously selected user', async () => {
     const requestedUserIds: string[] = []
     server.use(

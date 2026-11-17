@@ -1,5 +1,6 @@
 import { getErrorMessage } from '../api/client'
 import { usePosts } from '../hooks/usePosts'
+import { CreatePostSection } from './CreatePostSection'
 import { PostList } from './PostList'
 
 interface PostsPanelProps {
@@ -15,14 +16,20 @@ export function PostsPanel({ selectedUserId }: PostsPanelProps) {
 
       {selectedUserId === null ? (
         <p>Select a user to view their posts.</p>
-      ) : isPending ? (
-        <p role="status">Loading posts...</p>
-      ) : isError ? (
-        <p role="alert">{getErrorMessage(error)}</p>
-      ) : posts.length === 0 ? (
-        <p role="status">No posts found for this user.</p>
       ) : (
-        <PostList posts={posts} />
+        <>
+          {isPending ? (
+            <p role="status">Loading posts...</p>
+          ) : isError ? (
+            <p role="alert">{getErrorMessage(error)}</p>
+          ) : posts.length === 0 ? (
+            <p role="status">No posts found for this user.</p>
+          ) : (
+            <PostList posts={posts} />
+          )}
+
+          <CreatePostSection userId={selectedUserId} />
+        </>
       )}
     </section>
   )

@@ -141,13 +141,13 @@ feat: display posts for selected users
 
 ### **3.1 — Form infrastructure**
 
-- [ ] Install React Hook Form.
-- [ ] Install Zod and `@hookform/resolvers`.
-- [ ] Define the post creation schema.
-- [ ] Define the form input types using Zod inference.
-- [ ] Write tests for required title validation.
-- [ ] Write tests for required body validation.
-- [ ] Implement the validated post form.
+- [x] Install React Hook Form.
+- [x] Install Zod and `@hookform/resolvers`.
+- [x] Define the post creation schema.
+- [x] Define the form input types using Zod inference.
+- [x] Write tests for required title validation.
+- [x] Write tests for required body validation.
+- [x] Implement the validated post form.
 
 Schema:
 
@@ -160,13 +160,13 @@ const createPostSchema = z.object({
 
 ### **3.2 — Local post creation**
 
-- [ ] Implement post creation submission.
-- [ ] Associate the new post with the selected user.
-- [ ] Generate a temporary unique ID for the locally created post.
-- [ ] Update the corresponding TanStack Query cache.
-- [ ] Ensure the new post remains visible when switching users.
-- [ ] Reset the form after successful submission.
-- [ ] Add tests for successful creation and cache updates.
+- [x] Implement post creation submission.
+- [x] Associate the new post with the selected user.
+- [x] Generate a temporary unique ID for the locally created post.
+- [x] Update the corresponding TanStack Query cache.
+- [x] Ensure the new post remains visible when switching users.
+- [x] Reset the form after successful submission.
+- [x] Add tests for successful creation and cache updates.
 
 Important architectural decision:
 
@@ -184,11 +184,11 @@ test: cover post creation and validation behavior
 
 **Phase 3 acceptance criteria:**
 
-- [ ] Empty titles cannot be submitted.
-- [ ] Empty bodies cannot be submitted.
-- [ ] Valid posts appear immediately.
-- [ ] Created posts remain visible during the session.
-- [ ] Existing server-provided posts remain intact.
+- [x] Empty titles cannot be submitted.
+- [x] Empty bodies cannot be submitted.
+- [x] Valid posts appear immediately.
+- [x] Created posts remain visible during the session.
+- [x] Existing server-provided posts remain intact.
 
 ## **Phase 4 — UX and polish**
 
