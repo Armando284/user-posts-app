@@ -1,9 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Plus } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import { createPostSchema, type CreatePostInput } from '../schemas/post'
 
 interface CreatePostFormProps {
-  onSubmit: (values: CreatePostInput) => void
+  onSubmit: (values: CreatePostInput) => boolean | void
 }
 
 export function CreatePostForm({ onSubmit }: CreatePostFormProps) {
@@ -23,8 +24,11 @@ export function CreatePostForm({ onSubmit }: CreatePostFormProps) {
   return (
     <form
       onSubmit={handleSubmit((values) => {
-        onSubmit(values)
-        reset()
+        const didSubmit = onSubmit(values)
+
+        if (didSubmit !== false) {
+          reset()
+        }
       })}
       noValidate
       className="flex flex-col gap-5"
@@ -76,8 +80,9 @@ export function CreatePostForm({ onSubmit }: CreatePostFormProps) {
       <div className="flex justify-end">
         <button
           type="submit"
-          className="inline-flex h-10 cursor-pointer items-center justify-center rounded-lg bg-accent px-4 text-sm font-semibold text-white transition-colors hover:bg-accent-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+          className="inline-flex h-10 cursor-pointer items-center justify-center gap-2 rounded-lg bg-accent px-4 text-sm font-semibold text-white transition-colors hover:bg-accent-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
         >
+          <Plus aria-hidden="true" className="size-4" strokeWidth={2.25} />
           Create post
         </button>
       </div>

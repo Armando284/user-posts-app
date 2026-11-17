@@ -212,14 +212,14 @@ Current phase
 
 ### **4.2 — Interaction and feedback**
 
-- [ ] Install Lucide React.
-- [ ] Add meaningful icons to actions and navigation.
-- [ ] Install Sonner for notifications.
-- [ ] Implement success feedback after post creation.
-- [ ] Implement appropriate error notifications.
-- [ ] Install Motion for subtle transitions.
-- [ ] Add loading indicators and visual feedback.
-- [ ] Avoid excessive animation and unnecessary layout shifts.
+- [x] Install Lucide React.
+- [x] Add meaningful icons to actions and navigation.
+- [x] Install Sonner for notifications.
+- [x] Implement success feedback after post creation.
+- [x] Implement appropriate error notifications.
+- [x] Install Motion for subtle transitions.
+- [x] Add loading indicators and visual feedback.
+- [x] Avoid excessive animation and unnecessary layout shifts.
 
 ### **4.3 — Accessibility**
 

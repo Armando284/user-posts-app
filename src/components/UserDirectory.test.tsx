@@ -47,6 +47,30 @@ describe('UserDirectory', () => {
     expect(screen.queryByRole('list')).not.toBeInTheDocument()
   })
 
+  it('retries loading users from the error state', async () => {
+    let requestCount = 0
+    server.use(
+      http.get(`${API_URL}/users`, () => {
+        requestCount += 1
+
+        return requestCount === 1
+          ? HttpResponse.json(null, { status: 500 })
+          : HttpResponse.json(usersFixture)
+      }),
+    )
+
+    const user = userEvent.setup()
+    renderUserDirectory()
+
+    expect(await screen.findByRole('alert')).toHaveTextContent(
+      'The server encountered an error. Please try again later.',
+    )
+
+    await user.click(screen.getByRole('button', { name: 'Try again' }))
+
+    expect(await screen.findByText(usersFixture[0].name)).toBeInTheDocument()
+  })
+
   it('filters users by name case-insensitively', async () => {
     const user = userEvent.setup()
     renderUserDirectory()
