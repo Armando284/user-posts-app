@@ -52,12 +52,12 @@ Current phase
 
 ### **2.1 — API infrastructure**
 
-- [ ] Define `User` and `Post` TypeScript types based on JSONPlaceholder responses.
-- [ ] Create reusable API client with typed responses.
-- [ ] Implement HTTP error handling and normalized error messages.
-- [ ] Configure MSW handlers and test fixtures.
-- [ ] Configure MSW lifecycle and fail on unhandled requests.
-- [ ] Add API client tests for successful responses and HTTP errors.
+- [x] Define `User` and `Post` TypeScript types based on JSONPlaceholder responses.
+- [x] Create reusable API client with typed responses.
+- [x] Implement HTTP error handling and normalized error messages.
+- [x] Configure MSW handlers and test fixtures.
+- [x] Configure MSW lifecycle and fail on unhandled requests.
+- [x] Add API client tests for successful responses and HTTP errors.
 
 **Commit:**
 
@@ -67,11 +67,11 @@ feat: implement typed API client and MSW testing infrastructure
 
 ### **2.2 — Server-state management**
 
-- [ ] Install and configure TanStack Query.
-- [ ] Create a centralized `QueryClient`.
-- [ ] Configure sensible query defaults.
-- [ ] Add application-level `QueryClientProvider`.
-- [ ] Establish consistent query key conventions.
+- [x] Install and configure TanStack Query.
+- [x] Create a centralized `QueryClient`.
+- [x] Configure sensible query defaults.
+- [x] Add application-level `QueryClientProvider`.
+- [x] Establish consistent query key conventions.
 
 Suggested query keys:
 
@@ -90,14 +90,14 @@ feat: configure TanStack Query for server-state management
 
 ### **2.3 — User discovery**
 
-- [ ] Write tests for user list rendering.
-- [ ] Write tests for loading and error states.
-- [ ] Implement `useUsers` query hook.
-- [ ] Implement user list component.
-- [ ] Implement user search input.
-- [ ] Add case-insensitive filtering by user name.
-- [ ] Add empty search results state.
-- [ ] Verify search does not trigger unnecessary API requests.
+- [x] Write tests for user list rendering.
+- [x] Write tests for loading and error states.
+- [x] Implement `useUsers` query hook.
+- [x] Implement user list component.
+- [x] Implement user search input.
+- [x] Add case-insensitive filtering by user name.
+- [x] Add empty search results state.
+- [x] Verify search does not trigger unnecessary API requests.
 
 **Commit:**
 
@@ -107,14 +107,14 @@ feat: implement searchable user directory
 
 ### **2.4 — User selection and post retrieval**
 
-- [ ] Write tests for user selection.
-- [ ] Write tests for post loading and error states.
-- [ ] Implement user selection state.
-- [ ] Implement `usePosts(userId)` query hook.
-- [ ] Implement post list component.
-- [ ] Fetch posts when a user is selected.
-- [ ] Handle empty post collections.
-- [ ] Verify cached posts are reused when switching between previously selected users.
+- [x] Write tests for user selection.
+- [x] Write tests for post loading and error states.
+- [x] Implement user selection state.
+- [x] Implement `usePosts(userId)` query hook.
+- [x] Implement post list component.
+- [x] Fetch posts when a user is selected.
+- [x] Handle empty post collections.
+- [x] Verify cached posts are reused when switching between previously selected users.
 
 **Commit:**
 
@@ -124,12 +124,12 @@ feat: display posts for selected users
 
 **Phase 2 acceptance criteria:**
 
-- [ ] Users load from JSONPlaceholder.
-- [ ] Search filters users correctly.
-- [ ] Selecting a user displays their posts.
-- [ ] Loading, error and empty states are visible.
-- [ ] Repeated selections benefit from query caching.
-- [ ] All related tests pass.
+- [x] Users load from JSONPlaceholder.
+- [x] Search filters users correctly.
+- [x] Selecting a user displays their posts.
+- [x] Loading, error and empty states are visible.
+- [x] Repeated selections benefit from query caching.
+- [x] All related tests pass.
 
 ## **Phase 3 — Post creation**
 
