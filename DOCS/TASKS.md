@@ -314,11 +314,13 @@ this environment; see the report for details.
 
 ### **6.3 — Optional infrastructure**
 
-- [ ] Add a multi-stage Dockerfile.
-- [ ] Configure Nginx for SPA routing.
-- [ ] Verify container build and execution.
+- [x] Add a multi-stage Dockerfile.
+- [x] Configure Nginx for SPA routing.
+- [x] Verify container build and execution.
 
-Docker is optional and must not delay delivery.
+Docker is optional and must not delay delivery. The image was built and run with Podman because the
+Docker daemon was unavailable. Nginx syntax, `/healthz`, SPA fallback, security headers, and a
+browser smoke test passed. Zod JIT is disabled to keep the CSP free of `'unsafe-eval'`.
 
 ### **6.4 — GitHub delivery**
 

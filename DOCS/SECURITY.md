@@ -118,7 +118,8 @@ Permissions-Policy: camera=(), microphone=(), geolocation=()
 ```
 
 The inline-style allowance is required by the current UI/toast implementation. Revisit it if the
-app is hardened further.
+app is hardened further. Zod JIT compilation is disabled with `z.config({ jitless: true })` so the
+policy does not require `'unsafe-eval'`.
 
 ## OWASP ZAP baseline scan
 
