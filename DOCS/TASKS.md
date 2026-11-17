@@ -141,13 +141,13 @@ feat: display posts for selected users
 
 ### **3.1 — Form infrastructure**
 
-- [ ] Install React Hook Form.
-- [ ] Install Zod and `@hookform/resolvers`.
-- [ ] Define the post creation schema.
-- [ ] Define the form input types using Zod inference.
-- [ ] Write tests for required title validation.
-- [ ] Write tests for required body validation.
-- [ ] Implement the validated post form.
+- [x] Install React Hook Form.
+- [x] Install Zod and `@hookform/resolvers`.
+- [x] Define the post creation schema.
+- [x] Define the form input types using Zod inference.
+- [x] Write tests for required title validation.
+- [x] Write tests for required body validation.
+- [x] Implement the validated post form.
 
 Schema:
 
