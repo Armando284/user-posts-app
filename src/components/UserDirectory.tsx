@@ -5,6 +5,11 @@ import type { User } from '../types/user'
 import { UserList } from './UserList'
 import { UserSearch } from './UserSearch'
 
+interface UserDirectoryProps {
+  selectedUserId: number | null
+  onSelectUser: (userId: number) => void
+}
+
 function filterUsersByName(users: User[], searchTerm: string): User[] {
   const normalizedSearch = searchTerm.trim().toLowerCase()
 
@@ -15,7 +20,7 @@ function filterUsersByName(users: User[], searchTerm: string): User[] {
   return users.filter((user) => user.name.toLowerCase().includes(normalizedSearch))
 }
 
-export function UserDirectory() {
+export function UserDirectory({ selectedUserId, onSelectUser }: UserDirectoryProps) {
   const [searchTerm, setSearchTerm] = useState('')
   const { data: users = [], error, isError, isPending } = useUsers()
   const filteredUsers = useMemo(() => filterUsersByName(users, searchTerm), [users, searchTerm])
@@ -32,7 +37,11 @@ export function UserDirectory() {
       ) : filteredUsers.length === 0 ? (
         <p role="status">No users found.</p>
       ) : (
-        <UserList users={filteredUsers} />
+        <UserList
+          users={filteredUsers}
+          selectedUserId={selectedUserId}
+          onSelectUser={onSelectUser}
+        />
       )}
     </section>
   )

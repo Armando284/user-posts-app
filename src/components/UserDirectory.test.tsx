@@ -9,6 +9,10 @@ import { UserDirectory } from './UserDirectory'
 
 const API_URL = 'https://jsonplaceholder.typicode.com'
 
+function renderUserDirectory() {
+  return renderWithQueryClient(<UserDirectory selectedUserId={null} onSelectUser={() => {}} />)
+}
+
 describe('UserDirectory', () => {
   it('shows a loading state while users are being fetched', async () => {
     server.use(
@@ -18,14 +22,14 @@ describe('UserDirectory', () => {
       }),
     )
 
-    renderWithQueryClient(<UserDirectory />)
+    renderUserDirectory()
 
     expect(screen.getByRole('status')).toHaveTextContent('Loading users...')
     expect(await screen.findByText(usersFixture[0].name)).toBeInTheDocument()
   })
 
   it('renders the users returned by the API', async () => {
-    renderWithQueryClient(<UserDirectory />)
+    renderUserDirectory()
 
     expect(await screen.findByText(usersFixture[0].name)).toBeInTheDocument()
     expect(screen.getByText(usersFixture[1].name)).toBeInTheDocument()
@@ -35,7 +39,7 @@ describe('UserDirectory', () => {
   it('shows a normalized error message when fetching users fails', async () => {
     server.use(http.get(`${API_URL}/users`, () => HttpResponse.json(null, { status: 500 })))
 
-    renderWithQueryClient(<UserDirectory />)
+    renderUserDirectory()
 
     expect(await screen.findByRole('alert')).toHaveTextContent(
       'The server encountered an error. Please try again later.',
@@ -45,7 +49,7 @@ describe('UserDirectory', () => {
 
   it('filters users by name case-insensitively', async () => {
     const user = userEvent.setup()
-    renderWithQueryClient(<UserDirectory />)
+    renderUserDirectory()
 
     await screen.findByText(usersFixture[0].name)
     await user.type(screen.getByLabelText('Search users'), 'ERVIN')
@@ -57,7 +61,7 @@ describe('UserDirectory', () => {
 
   it('shows an empty state when no users match the search', async () => {
     const user = userEvent.setup()
-    renderWithQueryClient(<UserDirectory />)
+    renderUserDirectory()
 
     await screen.findByText(usersFixture[0].name)
     await user.type(screen.getByLabelText('Search users'), 'nobody')
@@ -71,7 +75,7 @@ describe('UserDirectory', () => {
     server.use(http.get(`${API_URL}/users`, usersRequest))
 
     const user = userEvent.setup()
-    renderWithQueryClient(<UserDirectory />)
+    renderUserDirectory()
 
     await screen.findByText(usersFixture[0].name)
     expect(usersRequest).toHaveBeenCalledTimes(1)

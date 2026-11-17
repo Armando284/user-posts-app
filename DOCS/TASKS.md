@@ -107,14 +107,14 @@ feat: implement searchable user directory
 
 ### **2.4 — User selection and post retrieval**
 
-- [ ] Write tests for user selection.
-- [ ] Write tests for post loading and error states.
-- [ ] Implement user selection state.
-- [ ] Implement `usePosts(userId)` query hook.
-- [ ] Implement post list component.
-- [ ] Fetch posts when a user is selected.
-- [ ] Handle empty post collections.
-- [ ] Verify cached posts are reused when switching between previously selected users.
+- [x] Write tests for user selection.
+- [x] Write tests for post loading and error states.
+- [x] Implement user selection state.
+- [x] Implement `usePosts(userId)` query hook.
+- [x] Implement post list component.
+- [x] Fetch posts when a user is selected.
+- [x] Handle empty post collections.
+- [x] Verify cached posts are reused when switching between previously selected users.
 
 **Commit:**
 
