@@ -52,8 +52,11 @@ describe('PostsPanel', () => {
 
     expect(await screen.findByText('My new post')).toBeInTheDocument()
     expect(screen.getByText('A locally created post')).toBeInTheDocument()
+    expect(screen.getByText('Leanne post one')).toBeInTheDocument()
+    expect(screen.getByText('Leanne post two')).toBeInTheDocument()
 
     const posts = queryClient.getQueryData<Post[]>(queryKeys.posts(1))
+    expect(posts).toHaveLength(postsFixture.filter((post) => post.userId === 1).length + 1)
     expect(posts?.[0]).toMatchObject({
       userId: 1,
       title: 'My new post',

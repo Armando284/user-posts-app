@@ -184,11 +184,11 @@ test: cover post creation and validation behavior
 
 **Phase 3 acceptance criteria:**
 
-- [ ] Empty titles cannot be submitted.
-- [ ] Empty bodies cannot be submitted.
-- [ ] Valid posts appear immediately.
-- [ ] Created posts remain visible during the session.
-- [ ] Existing server-provided posts remain intact.
+- [x] Empty titles cannot be submitted.
+- [x] Empty bodies cannot be submitted.
+- [x] Valid posts appear immediately.
+- [x] Created posts remain visible during the session.
+- [x] Existing server-provided posts remain intact.
 
 ## **Phase 4 — UX and polish**
 
