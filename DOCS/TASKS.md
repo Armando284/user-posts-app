@@ -52,8 +52,8 @@ Current phase
 
 ### **2.1 — API infrastructure**
 
-- [ ] Define `User` and `Post` TypeScript types based on JSONPlaceholder responses.
-- [ ] Create reusable API client with typed responses.
+- [x] Define `User` and `Post` TypeScript types based on JSONPlaceholder responses.
+- [x] Create reusable API client with typed responses.
 - [ ] Implement HTTP error handling and normalized error messages.
 - [ ] Configure MSW handlers and test fixtures.
 - [ ] Configure MSW lifecycle and fail on unhandled requests.
