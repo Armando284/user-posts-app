@@ -1,6 +1,6 @@
 # Security Review
 
-Last reviewed: 2026-11-16
+Last reviewed: 2026-11-17
 
 ## Scope
 
@@ -19,7 +19,9 @@ secrets, and applicable OWASP Top 10 risks.
 - No unsafe HTML sinks or dynamic code execution were found. ESLint rules now reject common
   unsafe HTML sinks, `eval`, and the `Function` constructor.
 - No secrets, credentials, environment files, or private keys are committed.
-- The optional OWASP ZAP baseline scan was not completed in this environment.
+- An OWASP ZAP baseline scan was completed on 2026-11-17 against the local production container and
+  JSONPlaceholder: 0 high, 1 medium, 2 low, and 3 informational findings. The scan is not a
+  penetration test; see the scan section for scope and limitations.
 - The main residual risks are deployment configuration (HTTPS and security headers) and the
   absence of a trusted backend for authorization, validation, rate limiting, and persistence.
 
@@ -75,6 +77,8 @@ execution.
 - Network failures, invalid JSON, and non-success HTTP statuses are caught and converted to
   safe user-facing messages. Raw browser errors and stack traces are not rendered.
 - Created posts are local UI state only. They are not sent to the API and are lost on reload.
+- Response headers observed on the external API (`X-Powered-By`, missing HSTS, cache-control) are
+  not controlled by this application and are discussed in the OWASP ZAP section.
 
 Limitations:
 
@@ -91,7 +95,9 @@ Limitations:
 | A02 Cryptographic Failures             | No secrets, authentication tokens, cookies, or sensitive data are handled. Deploy the static build over HTTPS.                                |
 | A03 Injection                          | Low risk. React escapes rendered text, no raw HTML is injected, no SQL or shell commands are used, and request parameters are URL-encoded.    |
 | A04 Insecure Design                    | The app is a demo with no authentication or server-side business rules. Do not treat client-side validation as a security boundary.           |
-| A05 Security Misconfiguration          | No secrets or production source maps are committed. Security headers are not configured by Vite preview; set them at the hosting layer.       |
+| A05 Security Misconfiguration          | No secrets or production source maps are committed. The Nginx production container sets security                                              |
+|                                        | headers (CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy);                                                  |
+|                                        | Vite preview does not. CSP still permits `style-src 'unsafe-inline'`; see the ZAP scan section.                                               |
 | A06 Vulnerable and Outdated Components | Audit is clean after the `typescript-eslint` update. Dependencies are locked with `pnpm-lock.yaml`.                                           |
 | A07 Identification and Authentication  | Not applicable; the app has no login or user accounts.                                                                                        |
 | A08 Software and Data Integrity        | Dependencies are lockfile-controlled and there are no external scripts or CDNs. CI should enforce `pnpm audit` and review dependency updates. |
@@ -102,8 +108,8 @@ Additional checks:
 
 - No `target="_blank"` links, so reverse tabnabbing is not applicable.
 - No state-changing API requests or cookies, so CSRF is not applicable in the current scope.
-- Clickjacking protection is not configured locally; use `frame-ancestors` or
-  `X-Frame-Options` at the hosting layer.
+- Clickjacking protection is configured in the Nginx container via `X-Frame-Options: DENY` and
+  `frame-ancestors 'none'`; Vite preview does not set these headers.
 
 ## Recommended deployment headers
 
@@ -121,17 +127,46 @@ The inline-style allowance is required by the current UI/toast implementation. R
 app is hardened further. Zod JIT compilation is disabled with `z.config({ jitless: true })` so the
 policy does not require `'unsafe-eval'`.
 
+HSTS is not set by `nginx.conf` because the container serves HTTP; configure it at the TLS
+terminator on the hosting platform or reverse proxy.
+
 ## OWASP ZAP baseline scan
 
-The optional scan was attempted against the local production preview:
+A ZAP baseline scan (ZAP by Checkmarx 2.17.0) was completed on 2026-11-17 against:
 
-- Docker was unavailable to the current user (socket permission denied).
-- Podman was available, but the GHCR image request returned HTTP 403.
-- Pulling the Docker Hub ZAP image did not finish within the 15-minute limit, so no scan report
-  was produced.
+- Local production container: `http://192.168.122.1:8080`
+- External API: `https://jsonplaceholder.typicode.com`
 
-Recommended follow-up: run the ZAP baseline scan in CI or another environment with working
-container registry access and archive the report as a build artifact.
+Report summary: **6 alerts — High 0, Medium 1, Low 2, Informational 3.**
+
+This was a passive baseline scan, not a penetration test. It did not cover every application flow,
+HTTP method, or OWASP Top 10 category. It also did not exercise authenticated or state-changing
+requests (none exist in this client-only app). The absence of high-risk findings does not mean the
+application has no security risk.
+
+Findings affecting this application:
+
+| Risk          | Finding                                      | Target                      | Assessment                                                                                                                                                          |
+| :------------ | :------------------------------------------- | :-------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Medium        | CSP: `style-src` unsafe-inline               | `http://192.168.122.1:8080` | Nginx permits inline styles. Sonner passes inline CSS variables and Motion applies inline animation styles, so the directive was retained pending nonce/hash work.  |
+| Informational | Information Disclosure - Suspicious Comments | `http://192.168.122.1:8080` | Pattern matched minified bundle string literals (API URL and user-facing error messages); not source comments, credentials, or a meaningful information disclosure. |
+| Informational | Modern Web Application                       | `http://192.168.122.1:8080` | Informational detection about the client-rendered app; no remediation required.                                                                                     |
+
+Findings affecting the external JSONPlaceholder API:
+
+| Risk          | Finding                             | Target                                 | Assessment                                                                                               |
+| :------------ | :---------------------------------- | :------------------------------------- | :------------------------------------------------------------------------------------------------------- |
+| Low           | `X-Powered-By` header               | `https://jsonplaceholder.typicode.com` | External API discloses Express. This header is not set by this project's Nginx configuration.            |
+| Low           | HSTS header not set                 | `https://jsonplaceholder.typicode.com` | External API response lacks HSTS. HSTS for this app belongs at its HTTPS terminator.                     |
+| Informational | Re-examine Cache-control Directives | `https://jsonplaceholder.typicode.com` | External API allows caching (observed `max-age=43200`). Outside app control; review if that API changes. |
+
+Report note: the alert-type table lists Suspicious Comments with a count of 3 while the risk
+summary totals three informational alerts and includes one request instance. This review records
+the inspected instance and does not claim three separate disclosures.
+
+Recommended follow-up: re-run the ZAP baseline scan in CI or another environment with working
+container registry access, archive the report as a build artifact, and treat findings on
+jsonplaceholder.typicode.com as outside this project's control.
 
 ## Known limitations and follow-up work
 
@@ -140,4 +175,7 @@ container registry access and archive the report as a build artifact.
 - No rate limiting, monitoring, or security event logging.
 - No automated CSP/header verification or security regression suite.
 - No dependency update automation yet.
-- Security headers are documented but not enforced by the current static preview.
+- Security headers are enforced by the Nginx container, not by the current static preview.
+- CSP still permits `style-src 'unsafe-inline'` for the current toast and animation styles.
+- External headers such as `X-Powered-By`, missing HSTS, and cache-control are outside this application's control.
+- The OWASP ZAP baseline scan is a limited automated check, not a full penetration test.
