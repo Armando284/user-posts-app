@@ -90,14 +90,14 @@ feat: configure TanStack Query for server-state management
 
 ### **2.3 — User discovery**
 
-- [ ] Write tests for user list rendering.
-- [ ] Write tests for loading and error states.
-- [ ] Implement `useUsers` query hook.
-- [ ] Implement user list component.
-- [ ] Implement user search input.
-- [ ] Add case-insensitive filtering by user name.
-- [ ] Add empty search results state.
-- [ ] Verify search does not trigger unnecessary API requests.
+- [x] Write tests for user list rendering.
+- [x] Write tests for loading and error states.
+- [x] Implement `useUsers` query hook.
+- [x] Implement user list component.
+- [x] Implement user search input.
+- [x] Add case-insensitive filtering by user name.
+- [x] Add empty search results state.
+- [x] Verify search does not trigger unnecessary API requests.
 
 **Commit:**
 
