@@ -14,7 +14,30 @@ describe('App', () => {
     renderWithQueryClient(<App />)
 
     expect(screen.getByRole('heading', { level: 1, name: 'User Posts' })).toBeInTheDocument()
+    expect(screen.getByRole('region', { name: 'Users' })).toBeInTheDocument()
+    expect(screen.getByRole('region', { name: 'Posts' })).toBeInTheDocument()
     expect(await screen.findByText(usersFixture[0].name)).toBeInTheDocument()
+  })
+
+  it('supports selecting a user with the keyboard', async () => {
+    const user = userEvent.setup()
+    renderWithQueryClient(<App />)
+
+    const search = screen.getByLabelText('Search users')
+    const leanne = await screen.findByRole('button', { name: /Leanne Graham/ })
+
+    expect(leanne).toHaveAttribute('aria-controls', 'posts-panel')
+
+    await user.tab()
+    expect(search).toHaveFocus()
+
+    await user.tab()
+    expect(leanne).toHaveFocus()
+
+    await user.keyboard('{Enter}')
+
+    expect(await screen.findByText('Leanne post one')).toBeInTheDocument()
+    expect(leanne).toHaveAttribute('aria-pressed', 'true')
   })
 
   it('fetches and displays posts when a user is selected', async () => {
@@ -26,6 +49,27 @@ describe('App', () => {
 
     expect(await screen.findByText('Leanne post one')).toBeInTheDocument()
     expect(leanne).toHaveAttribute('aria-pressed', 'true')
+  })
+
+  it('keeps a created post when switching between users', async () => {
+    const user = userEvent.setup()
+    renderWithQueryClient(<App />)
+
+    await user.click(await screen.findByRole('button', { name: /Leanne Graham/ }))
+    await screen.findByText('Leanne post one')
+
+    await user.type(screen.getByLabelText('Title'), 'Session post')
+    await user.type(screen.getByLabelText('Post content'), 'Created during the session')
+    await user.click(screen.getByRole('button', { name: 'Create post' }))
+    expect(await screen.findByText('Session post')).toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: /Ervin Howell/ }))
+    await screen.findByText('Ervin post one')
+
+    await user.click(screen.getByRole('button', { name: /Leanne Graham/ }))
+
+    expect(await screen.findByText('Session post')).toBeInTheDocument()
+    expect(screen.getByText('Leanne post one')).toBeInTheDocument()
   })
 
   it('reuses cached posts when returning to a previously selected user', async () => {
