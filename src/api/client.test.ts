@@ -1,15 +1,17 @@
 import { describe, expect, it } from 'vitest'
 import { http, HttpResponse } from 'msw'
 import { server } from '../test/server'
+import { usersFixture } from '../test/fixtures'
+import type { User } from '../types/user'
 import { ApiError, apiRequest, getErrorMessage } from './client'
 
 const API_URL = 'https://jsonplaceholder.typicode.com'
 
 describe('apiRequest', () => {
   it('returns parsed JSON from a successful response', async () => {
-    const result = await apiRequest<{ id: number }>('/test')
+    const result = await apiRequest<User[]>('/users')
 
-    expect(result).toEqual({ id: 1 })
+    expect(result).toEqual(usersFixture)
   })
 
   it('throws ApiError with a normalized message for HTTP errors', async () => {
