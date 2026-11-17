@@ -121,6 +121,31 @@ describe('PostsPanel', () => {
     expect(screen.queryByRole('list')).not.toBeInTheDocument()
   })
 
+  it('retries loading posts from the error state', async () => {
+    let requestCount = 0
+    server.use(
+      http.get(`${API_URL}/posts`, () => {
+        requestCount += 1
+
+        return requestCount === 1
+          ? HttpResponse.json(null, { status: 500 })
+          : HttpResponse.json(postsFixture.filter((post) => post.userId === 1))
+      }),
+    )
+
+    const user = userEvent.setup()
+    renderWithQueryClient(<PostsPanel selectedUserId={1} />)
+
+    expect(await screen.findByRole('alert')).toHaveTextContent(
+      'The server encountered an error. Please try again later.',
+    )
+
+    await user.click(screen.getByRole('button', { name: 'Try again' }))
+
+    expect(await screen.findByText('Leanne post one')).toBeInTheDocument()
+    expect(requestCount).toBe(2)
+  })
+
   it('shows an empty state when the selected user has no posts', async () => {
     renderWithQueryClient(<PostsPanel selectedUserId={3} />)
 

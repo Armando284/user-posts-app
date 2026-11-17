@@ -1,10 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import { http, HttpResponse } from 'msw'
-import { screen } from '@testing-library/react'
+import { screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { queryKeys } from './lib/queryKeys'
 import { postsFixture, usersFixture } from './test/fixtures'
 import { renderWithQueryClient } from './test/render'
 import { server } from './test/server'
+import type { Post } from './types/post'
 import App from './App'
 
 const API_URL = 'https://jsonplaceholder.typicode.com'
@@ -49,6 +51,65 @@ describe('App', () => {
 
     expect(await screen.findByText('Leanne post one')).toBeInTheDocument()
     expect(leanne).toHaveAttribute('aria-pressed', 'true')
+  })
+
+  it('filters users and preserves the selection when the search changes', async () => {
+    const user = userEvent.setup()
+    renderWithQueryClient(<App />)
+
+    const search = screen.getByLabelText('Search users')
+    const ervin = await screen.findByRole('button', { name: /Ervin Howell/ })
+
+    await user.type(search, 'ervin')
+
+    expect(screen.queryByRole('button', { name: /Leanne Graham/ })).not.toBeInTheDocument()
+
+    await user.click(ervin)
+
+    expect(await screen.findByText('Ervin post one')).toBeInTheDocument()
+    expect(ervin).toHaveAttribute('aria-pressed', 'true')
+
+    await user.clear(search)
+
+    expect(screen.getByRole('button', { name: /Leanne Graham/ })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Ervin Howell/ })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    )
+    expect(screen.getByText('Ervin post one')).toBeInTheDocument()
+  })
+
+  it('creates a post for the currently selected user after switching users', async () => {
+    const user = userEvent.setup()
+    const { queryClient } = renderWithQueryClient(<App />)
+
+    await user.click(await screen.findByRole('button', { name: /Leanne Graham/ }))
+    await screen.findByText('Leanne post one')
+
+    await user.click(screen.getByRole('button', { name: /Ervin Howell/ }))
+    await screen.findByText('Ervin post one')
+
+    await user.type(screen.getByLabelText('Title'), 'Ervin-only post')
+    await user.type(screen.getByLabelText('Post content'), 'Created after switching users.')
+    await user.click(screen.getByRole('button', { name: 'Create post' }))
+
+    expect(await screen.findByText('Ervin-only post')).toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: /Leanne Graham/ }))
+    await screen.findByText('Leanne post one')
+
+    expect(
+      within(screen.getByRole('list', { name: 'Posts' })).queryByText('Ervin-only post'),
+    ).not.toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: /Ervin Howell/ }))
+    expect(await screen.findByText('Ervin-only post')).toBeInTheDocument()
+
+    const ervinPosts = queryClient.getQueryData<Post[]>(queryKeys.posts(2)) ?? []
+    const leannePosts = queryClient.getQueryData<Post[]>(queryKeys.posts(1)) ?? []
+
+    expect(ervinPosts.some((post) => post.title === 'Ervin-only post')).toBe(true)
+    expect(leannePosts.some((post) => post.title === 'Ervin-only post')).toBe(false)
   })
 
   it('keeps a created post when switching between users', async () => {
