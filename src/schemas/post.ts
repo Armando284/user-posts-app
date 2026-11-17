@@ -1,5 +1,7 @@
 import { z } from 'zod'
 
+z.config({ jitless: true })
+
 export const createPostSchema = z.object({
   title: z.string().trim().min(1, 'Title is required'),
   body: z.string().trim().min(1, 'Post content is required'),

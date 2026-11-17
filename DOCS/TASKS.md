@@ -15,7 +15,7 @@
 - [x] Phase 3 — Post creation `Completed`
 - [x] Phase 4 — UX and polish `Completed`
 - [x] Phase 5 — Quality assurance `Completed`
-- [ ] Phase 6 — Security and delivery `Pending`
+- [x] Phase 6 — Security and delivery `Completed`
 
 ## **Phase 1 — Foundation**
 
@@ -290,38 +290,47 @@ chore: complete application quality checks
 
 ### **6.1 — Security**
 
-- [ ] Run `pnpm audit`.
-- [ ] Review dependency vulnerabilities.
-- [ ] Check for unsafe HTML rendering.
-- [ ] Review external API interaction and error handling.
-- [ ] Review applicable OWASP Top 10 risks.
+- [x] Run `pnpm audit`.
+- [x] Review dependency vulnerabilities.
+- [x] Check for unsafe HTML rendering.
+- [x] Review external API interaction and error handling.
+- [x] Review applicable OWASP Top 10 risks.
 - [ ] Optionally run OWASP ZAP baseline scan against the production build served locally.
-- [ ] Document findings and limitations.
+- [x] Document findings and limitations.
+
+Security review: `DOCS/SECURITY.md`. ZAP was attempted but blocked by container registry access in
+this environment; see the report for details.
 
 ### **6.2 — Documentation**
 
-- [ ] Replace the default Vite README.
-- [ ] Document project requirements.
-- [ ] Document installation and execution.
-- [ ] Document test and build commands.
-- [ ] Explain architecture and important technical decisions.
-- [ ] Document known limitations.
-- [ ] Explain what would be improved with more time.
-- [ ] Document AI usage, including prompts, accepted suggestions and corrections.
+- [x] Replace the default Vite README.
+- [x] Document project requirements.
+- [x] Document installation and execution.
+- [x] Document test and build commands.
+- [x] Explain architecture and important technical decisions.
+- [x] Document known limitations.
+- [x] Explain what would be improved with more time.
+- [x] Document AI usage, including prompts, accepted suggestions and corrections.
 
 ### **6.3 — Optional infrastructure**
 
-- [ ] Add a multi-stage Dockerfile.
-- [ ] Configure Nginx for SPA routing.
-- [ ] Verify container build and execution.
+- [x] Add a multi-stage Dockerfile.
+- [x] Configure Nginx for SPA routing.
+- [x] Verify container build and execution.
 
-Docker is optional and must not delay delivery.
+Docker is optional and must not delay delivery. The image was built and run with Podman because the
+Docker daemon was unavailable. Nginx syntax, `/healthz`, SPA fallback, security headers, and a
+browser smoke test passed. Zod JIT is disabled to keep the CSP free of `'unsafe-eval'`.
 
 ### **6.4 — GitHub delivery**
 
-- [ ] Review commit history.
-- [ ] Remove temporary files and debugging code.
-- [ ] Verify the repository is public.
-- [ ] Ensure no secrets or personal credentials are committed.
-- [ ] Push all phase branches and final changes.
-- [ ] Record actual implementation time.
+- [x] Review commit history.
+- [x] Remove temporary files and debugging code.
+- [x] Verify the repository is public.
+- [x] Ensure no secrets or personal credentials are committed.
+- [x] Push all phase branches and final changes.
+- [x] Record actual implementation time.
+
+Commit history reviewed; no secrets, credentials, debug code, or temporary repository files were
+found. The repository is public and all phase branches plus the final security/delivery branch were
+pushed to `origin`.
