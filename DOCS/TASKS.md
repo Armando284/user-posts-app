@@ -1,74 +1,322 @@
-# Task Tracker — User Posts App
+# **User Posts — Engineering Task Plan**
 
-- **Branch:** `develop`
-- **Last review:** 2026-11-16
-- **Last commit:** `045856f` (Merge PR #1 — scaffold)
+> The application has one primary workflow:
+>
+>   1. Discover and search users.
+>   2. Select a user.
+>   3. Read that user's posts.
+>   4. Create a post.
+>   5. See the new post immediately.
 
-**Legend:** `[x]` done · `[ ]` pending · _(partial)_ base exists, not implemented
 
-## Progress
+## **Project roadmap**
 
-| Phase | Priority | Done |
-| ----- | -------- | ---- |
-| 1 — Foundation | Highest | 6/6 |
-| 2 — Core functionality | Highest | 0/7 (1 partial) |
-| 3 — Post creation | Highest | 0/5 |
-| 4 — UX and polish | Medium | 0/5 |
-| 5 — Quality assurance | Medium | 0/5 |
-| 6 — Security and delivery | Optional | 0/4 |
+- [x] Phase 1 — Foundation `Completed`
+- [ ] Phase 2 — Core functionality `Current`
+- [ ] Phase 3 — Post creation `Pending`
+- [ ] Phase 4 — UX and polish `Pending`
+- [ ] Phase 5 — Quality assurance `Pending`
+- [ ] Phase 6 — Security and delivery `Pending`
 
-## Phase 1 — Foundation (Highest) — complete
+## **Phase 1 — Foundation**
 
-- [x] Vite + React + TypeScript — `b5bc61e`
-- [x] Tailwind CSS v4 — `e76db72`
-- [x] ESLint + Prettier — `061a897`
-- [x] Vitest + Testing Library — `8bc313c`, `b7ce4d5`
-- [x] Scripts and initial structure — `46cf400`, `b550c7f`
-- [x] First commit / scaffold PR — `045856f`
+Completed
 
-## Phase 2 — Core functionality (Highest)
+`feat/scaffold`
 
-- [ ] **API service** — typed client for users and posts, configurable base URL, error handling.
-- [ ] **TanStack Query setup** — `QueryClientProvider` and query defaults. _(Partial: dependency installed in `903e380`.)_
-- [ ] **Users list and search** — fetch users, filter by name/email with debounce.
-- [ ] **User selection** — selected state, visual highlight, optional URL sync.
-- [ ] **User posts** — query by `userId`, refetch on user change.
-- [ ] **Loading, error and empty states** — reusable UI for each case.
-- [ ] **TDD per feature** — tests for services, hooks and components. _(MSW installed in `903e380`; handlers not configured yet.)_
+**Goal:** Establish a reproducible development environment with quality tooling and testing infrastructure.
 
-## Phase 3 — Post creation (Highest)
+- [x] Initialize React + TypeScript using Vite.
+- [x] Configure Tailwind CSS.
+- [x] Configure ESLint.
+- [x] Configure Prettier.
+- [x] Configure Vitest and jsdom.
+- [x] Configure React Testing Library.
+- [x] Add test scripts and quality-check scripts.
+- [x] Configure TypeScript strict mode.
+- [x] Add initial application smoke test.
+- [x] Verify lint, typecheck, tests and production build.
+- [x] Create initial scaffold commit.
 
-- [ ] **React Hook Form** — install and configure.
-- [ ] **Zod schema** — validation rules for title and body.
-- [ ] **Validation** — field errors, accessible messages, block invalid submit.
-- [ ] **Local cache update** — invalidate or optimistically update the posts query.
-- [ ] **Tests** — validation, submit, loading/error and cache update.
+**Branch:** `feat/scaffold`
 
-## Phase 4 — UX and polish (Medium)
+## **Phase 2 — Core functionality**
 
-- [ ] **Lucide** — icons.
-- [ ] **Sonner** — success/error notifications.
-- [ ] **Motion** — transitions, respecting `prefers-reduced-motion`.
-- [ ] **Responsive and accessibility** — keyboard, focus, labels, landmarks, contrast.
-- [ ] **Visual states** — hover, focus, disabled, loading, spacing and hierarchy.
+Current phase
 
-## Phase 5 — Quality assurance (Medium)
+`feat/core-functionality`
 
-- [ ] **Full test suite** — unit and integration tests for critical flows.
-- [ ] **Typecheck** — `pnpm typecheck`.
-- [ ] **Lint** — `pnpm lint`.
-- [ ] **Build** — `pnpm build`.
-- [ ] **Error review** — console, runtime and edge cases.
+**Target: 75 minutes**
 
-> Scripts exist and pass on the scaffold, but these tasks stay pending until real functionality and tests are in place.
+**Goal:** Implement user discovery, selection and post retrieval, with reliable API integration and server-state management.
 
-## Phase 6 — Security and delivery (Optional)
+### **2.1 — API infrastructure**
 
-- [ ] **Dependency audit** — `pnpm audit`.
-- [ ] **Security review** — XSS, sanitization, secrets, CSP if applicable.
-- [ ] **README** — setup, scripts, architecture and decisions.
-- [ ] **Docker** — only if time permits.
+- [ ] Define `User` and `Post` TypeScript types based on JSONPlaceholder responses.
+- [ ] Create reusable API client with typed responses.
+- [ ] Implement HTTP error handling and normalized error messages.
+- [ ] Configure MSW handlers and test fixtures.
+- [ ] Configure MSW lifecycle and fail on unhandled requests.
+- [ ] Add API client tests for successful responses and HTTP errors.
 
-## Current checks
+**Commit:**
 
-`typecheck`, `lint`, `test:run` (1 scaffold test) and `build` all pass on `develop`.
+```
+feat: implement typed API client and MSW testing infrastructure
+```
+
+### **2.2 — Server-state management**
+
+- [ ] Install and configure TanStack Query.
+- [ ] Create a centralized `QueryClient`.
+- [ ] Configure sensible query defaults.
+- [ ] Add application-level `QueryClientProvider`.
+- [ ] Establish consistent query key conventions.
+
+Suggested query keys:
+
+```
+const queryKeys = {
+  users: ['users'] as const,
+  posts: (userId: number) => ['posts', userId] as const,
+}
+```
+
+**Commit:**
+
+```
+feat: configure TanStack Query for server-state management
+```
+
+### **2.3 — User discovery**
+
+- [ ] Write tests for user list rendering.
+- [ ] Write tests for loading and error states.
+- [ ] Implement `useUsers` query hook.
+- [ ] Implement user list component.
+- [ ] Implement user search input.
+- [ ] Add case-insensitive filtering by user name.
+- [ ] Add empty search results state.
+- [ ] Verify search does not trigger unnecessary API requests.
+
+**Commit:**
+
+```
+feat: implement searchable user directory
+```
+
+### **2.4 — User selection and post retrieval**
+
+- [ ] Write tests for user selection.
+- [ ] Write tests for post loading and error states.
+- [ ] Implement user selection state.
+- [ ] Implement `usePosts(userId)` query hook.
+- [ ] Implement post list component.
+- [ ] Fetch posts when a user is selected.
+- [ ] Handle empty post collections.
+- [ ] Verify cached posts are reused when switching between previously selected users.
+
+**Commit:**
+
+```
+feat: display posts for selected users
+```
+
+**Phase 2 acceptance criteria:**
+
+- [ ] Users load from JSONPlaceholder.
+- [ ] Search filters users correctly.
+- [ ] Selecting a user displays their posts.
+- [ ] Loading, error and empty states are visible.
+- [ ] Repeated selections benefit from query caching.
+- [ ] All related tests pass.
+
+## **Phase 3 — Post creation**
+
+`feat/post-creation`
+
+**Target: 30 minutes**
+
+**Goal:** Allow users to create posts with reliable validation and immediate local updates.
+
+### **3.1 — Form infrastructure**
+
+- [ ] Install React Hook Form.
+- [ ] Install Zod and `@hookform/resolvers`.
+- [ ] Define the post creation schema.
+- [ ] Define the form input types using Zod inference.
+- [ ] Write tests for required title validation.
+- [ ] Write tests for required body validation.
+- [ ] Implement the validated post form.
+
+Schema:
+
+```
+const createPostSchema = z.object({
+  title: z.string().trim().min(1, 'Title is required'),
+  body: z.string().trim().min(1, 'Post content is required'),
+})
+```
+
+### **3.2 — Local post creation**
+
+- [ ] Implement post creation submission.
+- [ ] Associate the new post with the selected user.
+- [ ] Generate a temporary unique ID for the locally created post.
+- [ ] Update the corresponding TanStack Query cache.
+- [ ] Ensure the new post remains visible when switching users.
+- [ ] Reset the form after successful submission.
+- [ ] Add tests for successful creation and cache updates.
+
+Important architectural decision:
+
+**Do not depend on JSONPlaceholder persistence.**
+
+We should not pretend that a successful POST request means the resource has been permanently saved. Since persistence is explicitly outside the requirements, we can maintain newly created posts in the client-side query cache.
+
+**Commit groups:**
+
+```
+feat: implement validated post creation form
+feat: persist created posts in client-side query cache
+test: cover post creation and validation behavior
+```
+
+**Phase 3 acceptance criteria:**
+
+- [ ] Empty titles cannot be submitted.
+- [ ] Empty bodies cannot be submitted.
+- [ ] Valid posts appear immediately.
+- [ ] Created posts remain visible during the session.
+- [ ] Existing server-provided posts remain intact.
+
+## **Phase 4 — UX and polish**
+
+`feat/ux-polish`
+
+**Target: 25 minutes**
+
+**Goal:** Deliver a coherent, accessible and responsive user experience.
+
+### **4.1 — Visual foundation**
+
+- [ ] Establish typography, spacing and color conventions.
+- [ ] Define reusable layout primitives where useful.
+- [ ] Create a responsive application layout.
+- [ ] Establish visual hierarchy between users and posts.
+- [ ] Implement selected-user visual state.
+
+### **4.2 — Interaction and feedback**
+
+- [ ] Install Lucide React.
+- [ ] Add meaningful icons to actions and navigation.
+- [ ] Install Sonner for notifications.
+- [ ] Implement success feedback after post creation.
+- [ ] Implement appropriate error notifications.
+- [ ] Install Motion for subtle transitions.
+- [ ] Add loading indicators and visual feedback.
+- [ ] Avoid excessive animation and unnecessary layout shifts.
+
+### **4.3 — Accessibility**
+
+- [ ] Use semantic HTML.
+- [ ] Ensure form fields have accessible labels.
+- [ ] Ensure keyboard navigation works.
+- [ ] Provide visible focus indicators.
+- [ ] Ensure errors are accessible to screen readers.
+- [ ] Check color contrast.
+
+**Commit groups:**
+
+```
+feat: establish responsive application interface
+feat: add interaction feedback and subtle animations
+fix: improve accessibility and responsive behavior
+```
+
+## **Phase 5 — Quality assurance**
+
+`chore/quality-assurance`
+
+**Target: 20 minutes**
+
+**Goal:** Validate the entire application rather than individual features in isolation.
+
+### **5.1 — Automated testing**
+
+- [ ] Verify all tests pass.
+- [ ] Add any missing integration tests.
+- [ ] Test switching between users.
+- [ ] Test search and selection together.
+- [ ] Test post creation after changing selected users.
+- [ ] Test error recovery and retry behavior.
+- [ ] Verify MSW does not allow unintended external requests.
+
+### **5.2 — Static analysis**
+
+- [ ] Run ESLint.
+- [ ] Run Prettier checks.
+- [ ] Run TypeScript type checking.
+- [ ] Run production build.
+- [ ] Review warnings and eliminate unnecessary suppressions.
+
+### **5.3 — Manual verification**
+
+- [ ] Test the complete user journey.
+- [ ] Test empty and invalid form submissions.
+- [ ] Test network failures.
+- [ ] Check responsive behavior.
+- [ ] Check browser console for errors.
+- [ ] Review dependencies for unnecessary additions.
+
+**Commit:**
+
+```
+chore: complete application quality checks
+```
+
+## **Phase 6 — Security and delivery**
+
+`chore/security-delivery`
+
+**Target: 10 minutes, with Docker optional**
+
+**Goal:** Deliver a reproducible, documented and publicly accessible project.
+
+### **6.1 — Security**
+
+- [ ] Run `pnpm audit`.
+- [ ] Review dependency vulnerabilities.
+- [ ] Check for unsafe HTML rendering.
+- [ ] Review external API interaction and error handling.
+- [ ] Review applicable OWASP Top 10 risks.
+- [ ] Optionally run OWASP ZAP baseline scan against the production build served locally.
+- [ ] Document findings and limitations.
+
+### **6.2 — Documentation**
+
+- [ ] Replace the default Vite README.
+- [ ] Document project requirements.
+- [ ] Document installation and execution.
+- [ ] Document test and build commands.
+- [ ] Explain architecture and important technical decisions.
+- [ ] Document known limitations.
+- [ ] Explain what would be improved with more time.
+- [ ] Document AI usage, including prompts, accepted suggestions and corrections.
+
+### **6.3 — Optional infrastructure**
+
+- [ ] Add a multi-stage Dockerfile.
+- [ ] Configure Nginx for SPA routing.
+- [ ] Verify container build and execution.
+
+Docker is optional and must not delay delivery.
+
+### **6.4 — GitHub delivery**
+
+- [ ] Review commit history.
+- [ ] Remove temporary files and debugging code.
+- [ ] Verify the repository is public.
+- [ ] Ensure no secrets or personal credentials are committed.
+- [ ] Push all phase branches and final changes.
+- [ ] Record actual implementation time.
