@@ -24,7 +24,7 @@ export function UserSearch({ value, onChange }: UserSearchProps) {
           onChange={(event) => onChange(event.target.value)}
           placeholder="Search by name"
           autoComplete="off"
-          className="h-10 w-full rounded-lg border border-line bg-surface pr-3 pl-9 text-base text-ink transition-colors placeholder:text-muted focus:border-accent"
+          className="h-10 w-full rounded-lg border border-line-strong bg-surface pr-3 pl-9 text-base text-ink transition-colors placeholder:text-muted focus:border-accent"
         />
       </div>
     </div>

@@ -8,6 +8,7 @@
   --color-ink: #1c2321;
   --color-muted: #5b6662;
   --color-line: #dde1dc;
+  --color-line-strong: #828d87;
 
   --color-accent: #0f766e;
   --color-accent-strong: #115e59;
@@ -60,4 +61,10 @@
     border: 3px solid var(--color-canvas);
     border-radius: 999px;
   }
+}
+
+[data-sonner-toast]:focus-visible,
+[data-sonner-toast] [data-close-button]:focus-visible {
+  outline: 2px solid var(--color-accent-strong);
+  outline-offset: 3px;
 }

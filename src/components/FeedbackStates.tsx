@@ -24,13 +24,12 @@ interface ErrorStateProps {
 
 export function ErrorState({ message, onRetry }: ErrorStateProps) {
   return (
-    <div
-      role="alert"
-      className="flex items-start gap-2.5 rounded-xl bg-danger-soft px-4 py-4 text-sm font-medium leading-6 text-danger"
-    >
+    <div className="flex items-start gap-2.5 rounded-xl bg-danger-soft px-4 py-4 text-sm font-medium leading-6 text-danger">
       <CircleAlert aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
       <div className="flex flex-col gap-2">
-        <p>{message}</p>
+        <p role="alert" aria-atomic="true">
+          {message}
+        </p>
         {onRetry ? (
           <button
             type="button"

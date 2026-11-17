@@ -23,6 +23,7 @@ export function CreatePostForm({ onSubmit }: CreatePostFormProps) {
 
   return (
     <form
+      aria-labelledby="create-post-heading"
       onSubmit={handleSubmit((values) => {
         const didSubmit = onSubmit(values)
 
@@ -33,7 +34,9 @@ export function CreatePostForm({ onSubmit }: CreatePostFormProps) {
       noValidate
       className="flex flex-col gap-5"
     >
-      <h3 className="text-base font-semibold tracking-tight text-ink">Create a post</h3>
+      <h3 id="create-post-heading" className="text-base font-semibold tracking-tight text-ink">
+        Create a post
+      </h3>
 
       <div className="flex flex-col gap-2">
         <label htmlFor="post-title" className="text-sm font-medium text-ink">
@@ -42,10 +45,11 @@ export function CreatePostForm({ onSubmit }: CreatePostFormProps) {
         <input
           id="post-title"
           type="text"
+          required
           aria-invalid={Boolean(errors.title)}
           aria-describedby={errors.title ? 'post-title-error' : undefined}
           className={`h-10 w-full rounded-lg border bg-surface px-3 text-base text-ink transition-colors placeholder:text-muted focus:border-accent ${
-            errors.title ? 'border-danger' : 'border-line'
+            errors.title ? 'border-danger' : 'border-line-strong'
           }`}
           {...register('title')}
         />
@@ -63,10 +67,11 @@ export function CreatePostForm({ onSubmit }: CreatePostFormProps) {
         <textarea
           id="post-body"
           rows={4}
+          required
           aria-invalid={Boolean(errors.body)}
           aria-describedby={errors.body ? 'post-body-error' : undefined}
           className={`min-h-32 w-full resize-y rounded-lg border bg-surface px-3 py-2.5 text-base leading-6 text-ink transition-colors placeholder:text-muted focus:border-accent ${
-            errors.body ? 'border-danger' : 'border-line'
+            errors.body ? 'border-danger' : 'border-line-strong'
           }`}
           {...register('body')}
         />

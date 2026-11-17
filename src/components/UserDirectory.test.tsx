@@ -41,9 +41,10 @@ describe('UserDirectory', () => {
 
     renderUserDirectory()
 
-    expect(await screen.findByRole('alert')).toHaveTextContent(
-      'The server encountered an error. Please try again later.',
-    )
+    const alert = await screen.findByRole('alert')
+
+    expect(alert).toHaveTextContent('The server encountered an error. Please try again later.')
+    expect(alert).not.toContainElement(screen.getByRole('button', { name: 'Try again' }))
     expect(screen.queryByRole('list')).not.toBeInTheDocument()
   })
 

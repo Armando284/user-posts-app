@@ -2,19 +2,18 @@
 
 > The application has one primary workflow:
 >
->   1. Discover and search users.
->   2. Select a user.
->   3. Read that user's posts.
->   4. Create a post.
->   5. See the new post immediately.
-
+> 1. Discover and search users.
+> 2. Select a user.
+> 3. Read that user's posts.
+> 4. Create a post.
+> 5. See the new post immediately.
 
 ## **Project roadmap**
 
 - [x] Phase 1 — Foundation `Completed`
 - [x] Phase 2 — Core functionality `Completed`
 - [x] Phase 3 — Post creation `Completed`
-- [ ] Phase 4 — UX and polish `Current`
+- [x] Phase 4 — UX and polish `Completed`
 - [ ] Phase 5 — Quality assurance `Pending`
 - [ ] Phase 6 — Security and delivery `Pending`
 
@@ -194,7 +193,7 @@ test: cover post creation and validation behavior
 
 ## **Phase 4 — UX and polish**
 
-Current phase
+Completed
 
 `feat/ux-polish`
 
@@ -223,12 +222,12 @@ Current phase
 
 ### **4.3 — Accessibility**
 
-- [ ] Use semantic HTML.
-- [ ] Ensure form fields have accessible labels.
-- [ ] Ensure keyboard navigation works.
-- [ ] Provide visible focus indicators.
-- [ ] Ensure errors are accessible to screen readers.
-- [ ] Check color contrast.
+- [x] Use semantic HTML.
+- [x] Ensure form fields have accessible labels.
+- [x] Ensure keyboard navigation works.
+- [x] Provide visible focus indicators.
+- [x] Ensure errors are accessible to screen readers.
+- [x] Check color contrast.
 
 **Commit groups:**
 

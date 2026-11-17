@@ -22,6 +22,7 @@ export function PostsPanel({ selectedUserId }: PostsPanelProps) {
 
   return (
     <section
+      id="posts-panel"
       aria-labelledby="posts-heading"
       className="flex min-h-[26rem] flex-col gap-6 rounded-2xl border border-line bg-surface p-5 shadow-sm sm:p-6"
     >
