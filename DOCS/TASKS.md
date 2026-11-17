@@ -124,12 +124,12 @@ feat: display posts for selected users
 
 **Phase 2 acceptance criteria:**
 
-- [ ] Users load from JSONPlaceholder.
-- [ ] Search filters users correctly.
-- [ ] Selecting a user displays their posts.
-- [ ] Loading, error and empty states are visible.
-- [ ] Repeated selections benefit from query caching.
-- [ ] All related tests pass.
+- [x] Users load from JSONPlaceholder.
+- [x] Search filters users correctly.
+- [x] Selecting a user displays their posts.
+- [x] Loading, error and empty states are visible.
+- [x] Repeated selections benefit from query caching.
+- [x] All related tests pass.
 
 ## **Phase 3 — Post creation**
 
