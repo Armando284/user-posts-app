@@ -11,11 +11,12 @@ function renderCreatePostForm(onSubmit: (values: CreatePostInput) => void = vi.f
 }
 
 describe('CreatePostForm', () => {
-  it('renders the title, content and submit controls', () => {
+  it('renders the labelled form and required controls', () => {
     renderCreatePostForm()
 
-    expect(screen.getByLabelText('Title')).toBeInTheDocument()
-    expect(screen.getByLabelText('Post content')).toBeInTheDocument()
+    expect(screen.getByRole('form', { name: 'Create a post' })).toBeInTheDocument()
+    expect(screen.getByLabelText('Title')).toBeRequired()
+    expect(screen.getByLabelText('Post content')).toBeRequired()
     expect(screen.getByRole('button', { name: 'Create post' })).toBeInTheDocument()
   })
 
@@ -28,6 +29,8 @@ describe('CreatePostForm', () => {
 
     expect(await screen.findByRole('alert')).toHaveTextContent('Title is required')
     expect(screen.getByLabelText('Title')).toHaveAttribute('aria-invalid', 'true')
+    expect(screen.getByLabelText('Title')).toHaveAccessibleDescription('Title is required')
+    expect(screen.getByLabelText('Title')).toHaveFocus()
     expect(onSubmit).not.toHaveBeenCalled()
   })
 
@@ -40,6 +43,10 @@ describe('CreatePostForm', () => {
 
     expect(await screen.findByRole('alert')).toHaveTextContent('Post content is required')
     expect(screen.getByLabelText('Post content')).toHaveAttribute('aria-invalid', 'true')
+    expect(screen.getByLabelText('Post content')).toHaveAccessibleDescription(
+      'Post content is required',
+    )
+    expect(screen.getByLabelText('Post content')).toHaveFocus()
     expect(onSubmit).not.toHaveBeenCalled()
   })
 

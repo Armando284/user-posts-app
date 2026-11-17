@@ -2,19 +2,18 @@
 
 > The application has one primary workflow:
 >
->   1. Discover and search users.
->   2. Select a user.
->   3. Read that user's posts.
->   4. Create a post.
->   5. See the new post immediately.
-
+> 1. Discover and search users.
+> 2. Select a user.
+> 3. Read that user's posts.
+> 4. Create a post.
+> 5. See the new post immediately.
 
 ## **Project roadmap**
 
 - [x] Phase 1 — Foundation `Completed`
-- [ ] Phase 2 — Core functionality `Current`
-- [ ] Phase 3 — Post creation `Pending`
-- [ ] Phase 4 — UX and polish `Pending`
+- [x] Phase 2 — Core functionality `Completed`
+- [x] Phase 3 — Post creation `Completed`
+- [x] Phase 4 — UX and polish `Completed`
 - [ ] Phase 5 — Quality assurance `Pending`
 - [ ] Phase 6 — Security and delivery `Pending`
 
@@ -42,7 +41,7 @@ Completed
 
 ## **Phase 2 — Core functionality**
 
-Current phase
+Completed
 
 `feat/core-functionality`
 
@@ -133,6 +132,8 @@ feat: display posts for selected users
 
 ## **Phase 3 — Post creation**
 
+Completed
+
 `feat/post-creation`
 
 **Target: 30 minutes**
@@ -192,6 +193,8 @@ test: cover post creation and validation behavior
 
 ## **Phase 4 — UX and polish**
 
+Completed
+
 `feat/ux-polish`
 
 **Target: 25 minutes**
@@ -200,31 +203,31 @@ test: cover post creation and validation behavior
 
 ### **4.1 — Visual foundation**
 
-- [ ] Establish typography, spacing and color conventions.
-- [ ] Define reusable layout primitives where useful.
-- [ ] Create a responsive application layout.
-- [ ] Establish visual hierarchy between users and posts.
-- [ ] Implement selected-user visual state.
+- [x] Establish typography, spacing and color conventions.
+- [x] Define reusable layout primitives where useful.
+- [x] Create a responsive application layout.
+- [x] Establish visual hierarchy between users and posts.
+- [x] Implement selected-user visual state.
 
 ### **4.2 — Interaction and feedback**
 
-- [ ] Install Lucide React.
-- [ ] Add meaningful icons to actions and navigation.
-- [ ] Install Sonner for notifications.
-- [ ] Implement success feedback after post creation.
-- [ ] Implement appropriate error notifications.
-- [ ] Install Motion for subtle transitions.
-- [ ] Add loading indicators and visual feedback.
-- [ ] Avoid excessive animation and unnecessary layout shifts.
+- [x] Install Lucide React.
+- [x] Add meaningful icons to actions and navigation.
+- [x] Install Sonner for notifications.
+- [x] Implement success feedback after post creation.
+- [x] Implement appropriate error notifications.
+- [x] Install Motion for subtle transitions.
+- [x] Add loading indicators and visual feedback.
+- [x] Avoid excessive animation and unnecessary layout shifts.
 
 ### **4.3 — Accessibility**
 
-- [ ] Use semantic HTML.
-- [ ] Ensure form fields have accessible labels.
-- [ ] Ensure keyboard navigation works.
-- [ ] Provide visible focus indicators.
-- [ ] Ensure errors are accessible to screen readers.
-- [ ] Check color contrast.
+- [x] Use semantic HTML.
+- [x] Ensure form fields have accessible labels.
+- [x] Ensure keyboard navigation works.
+- [x] Provide visible focus indicators.
+- [x] Ensure errors are accessible to screen readers.
+- [x] Check color contrast.
 
 **Commit groups:**
 
