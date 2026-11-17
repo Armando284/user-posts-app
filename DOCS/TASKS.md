@@ -303,14 +303,14 @@ this environment; see the report for details.
 
 ### **6.2 — Documentation**
 
-- [ ] Replace the default Vite README.
-- [ ] Document project requirements.
-- [ ] Document installation and execution.
-- [ ] Document test and build commands.
-- [ ] Explain architecture and important technical decisions.
-- [ ] Document known limitations.
-- [ ] Explain what would be improved with more time.
-- [ ] Document AI usage, including prompts, accepted suggestions and corrections.
+- [x] Replace the default Vite README.
+- [x] Document project requirements.
+- [x] Document installation and execution.
+- [x] Document test and build commands.
+- [x] Explain architecture and important technical decisions.
+- [x] Document known limitations.
+- [x] Explain what would be improved with more time.
+- [x] Document AI usage, including prompts, accepted suggestions and corrections.
 
 ### **6.3 — Optional infrastructure**
 
