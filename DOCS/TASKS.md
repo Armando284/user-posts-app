@@ -160,13 +160,13 @@ const createPostSchema = z.object({
 
 ### **3.2 — Local post creation**
 
-- [ ] Implement post creation submission.
-- [ ] Associate the new post with the selected user.
-- [ ] Generate a temporary unique ID for the locally created post.
-- [ ] Update the corresponding TanStack Query cache.
-- [ ] Ensure the new post remains visible when switching users.
-- [ ] Reset the form after successful submission.
-- [ ] Add tests for successful creation and cache updates.
+- [x] Implement post creation submission.
+- [x] Associate the new post with the selected user.
+- [x] Generate a temporary unique ID for the locally created post.
+- [x] Update the corresponding TanStack Query cache.
+- [x] Ensure the new post remains visible when switching users.
+- [x] Reset the form after successful submission.
+- [x] Add tests for successful creation and cache updates.
 
 Important architectural decision:
 

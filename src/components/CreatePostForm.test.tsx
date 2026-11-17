@@ -57,5 +57,8 @@ describe('CreatePostForm', () => {
         body: 'Post body',
       })
     })
+
+    expect(screen.getByLabelText('Title')).toHaveValue('')
+    expect(screen.getByLabelText('Post content')).toHaveValue('')
   })
 })

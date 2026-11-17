@@ -11,6 +11,7 @@ export function CreatePostForm({ onSubmit }: CreatePostFormProps) {
     formState: { errors },
     handleSubmit,
     register,
+    reset,
   } = useForm<CreatePostInput>({
     resolver: zodResolver(createPostSchema),
     defaultValues: {
@@ -20,7 +21,13 @@ export function CreatePostForm({ onSubmit }: CreatePostFormProps) {
   })
 
   return (
-    <form onSubmit={handleSubmit((values) => onSubmit(values))} noValidate>
+    <form
+      onSubmit={handleSubmit((values) => {
+        onSubmit(values)
+        reset()
+      })}
+      noValidate
+    >
       <h3>Create a post</h3>
 
       <div>
