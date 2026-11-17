@@ -290,13 +290,16 @@ chore: complete application quality checks
 
 ### **6.1 — Security**
 
-- [ ] Run `pnpm audit`.
-- [ ] Review dependency vulnerabilities.
-- [ ] Check for unsafe HTML rendering.
-- [ ] Review external API interaction and error handling.
-- [ ] Review applicable OWASP Top 10 risks.
+- [x] Run `pnpm audit`.
+- [x] Review dependency vulnerabilities.
+- [x] Check for unsafe HTML rendering.
+- [x] Review external API interaction and error handling.
+- [x] Review applicable OWASP Top 10 risks.
 - [ ] Optionally run OWASP ZAP baseline scan against the production build served locally.
-- [ ] Document findings and limitations.
+- [x] Document findings and limitations.
+
+Security review: `DOCS/SECURITY.md`. ZAP was attempted but blocked by container registry access in
+this environment; see the report for details.
 
 ### **6.2 — Documentation**
 
