@@ -28,20 +28,20 @@ describe('apiRequest', () => {
     })
   })
 
-  it('normalizes client and server error statuses', async () => {
-    server.use(
-      http.get(`${API_URL}/bad-request`, () => HttpResponse.json(null, { status: 400 })),
-      http.get(`${API_URL}/server-error`, () => HttpResponse.json(null, { status: 500 })),
-    )
+  it.each([
+    [400, 'The request was invalid. Please check your input and try again.'],
+    [401, 'You are not authorized to perform this action.'],
+    [403, 'You do not have permission to perform this action.'],
+    [429, 'Too many requests. Please wait a moment and try again.'],
+    [500, 'The server encountered an error. Please try again later.'],
+    [503, 'The service is temporarily unavailable. Please try again later.'],
+  ] as const)('normalizes HTTP %i error responses', async (status, message) => {
+    server.use(http.get(`${API_URL}/status/${status}`, () => HttpResponse.json(null, { status })))
 
-    await expect(apiRequest('/bad-request')).rejects.toMatchObject({
-      status: 400,
-      message: 'The request was invalid. Please check your input and try again.',
-    })
-
-    await expect(apiRequest('/server-error')).rejects.toMatchObject({
-      status: 500,
-      message: 'The server encountered an error. Please try again later.',
+    await expect(apiRequest(`/status/${status}`)).rejects.toMatchObject({
+      name: 'ApiError',
+      status,
+      message,
     })
   })
 

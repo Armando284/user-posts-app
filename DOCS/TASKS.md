@@ -56,8 +56,8 @@ Current phase
 - [x] Create reusable API client with typed responses.
 - [x] Implement HTTP error handling and normalized error messages.
 - [x] Configure MSW handlers and test fixtures.
-- [ ] Configure MSW lifecycle and fail on unhandled requests.
-- [ ] Add API client tests for successful responses and HTTP errors.
+- [x] Configure MSW lifecycle and fail on unhandled requests.
+- [x] Add API client tests for successful responses and HTTP errors.
 
 **Commit:**
 
