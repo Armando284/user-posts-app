@@ -295,11 +295,14 @@ chore: complete application quality checks
 - [x] Check for unsafe HTML rendering.
 - [x] Review external API interaction and error handling.
 - [x] Review applicable OWASP Top 10 risks.
-- [ ] Optionally run OWASP ZAP baseline scan against the production build served locally.
+- [x] Optionally run OWASP ZAP baseline scan against the production build served locally.
 - [x] Document findings and limitations.
 
-Security review: `DOCS/SECURITY.md`. ZAP was attempted but blocked by container registry access in
-this environment; see the report for details.
+Security review: `DOCS/SECURITY.md`. An OWASP ZAP baseline scan was completed on 2026-11-17
+against the production container and JSONPlaceholder: 0 high, 1 medium, 2 low, 3 informational.
+The medium finding is CSP `style-src unsafe-inline`; the low findings affect only the external
+JSONPlaceholder API. The scan is not a penetration test; see `DOCS/SECURITY.md` for scope and
+limitations.
 
 ### **6.2 — Documentation**
 
