@@ -23,7 +23,7 @@
     "noFallthroughCasesInSwitch": true,
 
     /* Strict mode */
-    "strict": true,
+    "strict": true
   },
   "include": ["src"]
 }

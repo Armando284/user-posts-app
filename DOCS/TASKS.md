@@ -14,7 +14,7 @@
 - [x] Phase 2 — Core functionality `Completed`
 - [x] Phase 3 — Post creation `Completed`
 - [x] Phase 4 — UX and polish `Completed`
-- [ ] Phase 5 — Quality assurance `Pending`
+- [x] Phase 5 — Quality assurance `Completed`
 - [ ] Phase 6 — Security and delivery `Pending`
 
 ## **Phase 1 — Foundation**
@@ -239,6 +239,8 @@ fix: improve accessibility and responsive behavior
 
 ## **Phase 5 — Quality assurance**
 
+Completed
+
 `chore/quality-assurance`
 
 **Target: 20 minutes**
@@ -247,30 +249,30 @@ fix: improve accessibility and responsive behavior
 
 ### **5.1 — Automated testing**
 
-- [ ] Verify all tests pass.
-- [ ] Add any missing integration tests.
-- [ ] Test switching between users.
-- [ ] Test search and selection together.
-- [ ] Test post creation after changing selected users.
-- [ ] Test error recovery and retry behavior.
-- [ ] Verify MSW does not allow unintended external requests.
+- [x] Verify all tests pass.
+- [x] Add any missing integration tests.
+- [x] Test switching between users.
+- [x] Test search and selection together.
+- [x] Test post creation after changing selected users.
+- [x] Test error recovery and retry behavior.
+- [x] Verify MSW does not allow unintended external requests.
 
 ### **5.2 — Static analysis**
 
-- [ ] Run ESLint.
-- [ ] Run Prettier checks.
-- [ ] Run TypeScript type checking.
-- [ ] Run production build.
-- [ ] Review warnings and eliminate unnecessary suppressions.
+- [x] Run ESLint.
+- [x] Run Prettier checks.
+- [x] Run TypeScript type checking.
+- [x] Run production build.
+- [x] Review warnings and eliminate unnecessary suppressions.
 
 ### **5.3 — Manual verification**
 
-- [ ] Test the complete user journey.
-- [ ] Test empty and invalid form submissions.
-- [ ] Test network failures.
-- [ ] Check responsive behavior.
-- [ ] Check browser console for errors.
-- [ ] Review dependencies for unnecessary additions.
+- [x] Test the complete user journey.
+- [x] Test empty and invalid form submissions.
+- [x] Test network failures.
+- [x] Check responsive behavior.
+- [x] Check browser console for errors.
+- [x] Review dependencies for unnecessary additions.
 
 **Commit:**
 
