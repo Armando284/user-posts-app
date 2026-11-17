@@ -67,11 +67,11 @@ feat: implement typed API client and MSW testing infrastructure
 
 ### **2.2 — Server-state management**
 
-- [ ] Install and configure TanStack Query.
-- [ ] Create a centralized `QueryClient`.
-- [ ] Configure sensible query defaults.
-- [ ] Add application-level `QueryClientProvider`.
-- [ ] Establish consistent query key conventions.
+- [x] Install and configure TanStack Query.
+- [x] Create a centralized `QueryClient`.
+- [x] Configure sensible query defaults.
+- [x] Add application-level `QueryClientProvider`.
+- [x] Establish consistent query key conventions.
 
 Suggested query keys:
 
